@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<card_component xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid android:color="#91B4C6" />
+    <corner android:radius="27dp" />
+</card_component>
