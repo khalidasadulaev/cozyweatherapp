@@ -1,6 +1,6 @@
 package com.example.cozyweatherapp.features.home.domain.models
-// TODO(MakeMeModel)
-data class Sys(
+
+data class SysModel(
     val country: String,
     val id: Int,
     val sunrise: Int,

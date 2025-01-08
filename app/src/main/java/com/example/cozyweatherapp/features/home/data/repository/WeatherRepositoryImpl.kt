@@ -1,29 +1,29 @@
 package com.example.cozyweatherapp.features.home.data.repository
 
-import com.example.cozyweatherapp.features.home.data.datasource.remote.IWeatherAPI
-import com.example.cozyweatherapp.features.home.domain.models.WeatherModel
+import android.util.Log
+import com.example.cozyweatherapp.features.home.data.datasource.remote.WeatherApi
+import com.example.cozyweatherapp.features.home.domain.models.TodayWeatherModel
 import com.example.cozyweatherapp.features.home.domain.repository.IWeatherRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 
-class WeatherRepositoryImpl(private val weatherAPI: IWeatherAPI) : IWeatherRepository {
+class WeatherRepositoryImpl(private val weatherAPI: WeatherApi) : IWeatherRepository {
     override suspend fun getCurrentWeatherData(
         apiKey: String,
         lat: Double,
         lon: Double,
-        ): Flow<WeatherModel?> {
-        return flow {
-            val todayWeatherData = try {
-                weatherAPI.getCurrentWeatherData(
-                    apiKey = apiKey,
-                    lat = lat,
-                    lon = lon,
-                );
-            } catch (e: Throwable) {
-                println(e)
-                return@flow
-            }
-            emit(todayWeatherData)
+    ): TodayWeatherModel? {
+
+        return try {
+            val result = weatherAPI.getCurrentWeatherData(
+                apiKey = apiKey,
+                lat = lat,
+                lon = lon,
+            );
+
+            result
+        } catch (e: Throwable) {
+            Log.d("tag", "Error: $e")
+
+            null
         }
 
     }
