@@ -15,9 +15,9 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/shape_card_component"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:background="@drawable/shape_card_component"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

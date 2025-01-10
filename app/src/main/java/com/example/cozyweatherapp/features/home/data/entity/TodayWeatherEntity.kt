@@ -9,7 +9,7 @@ data class TodayWeatherEntity(
     val id: Int,
     val main: MainEnity,
     val name: String,
-    val rain: RainEnity,
+    val rain: RainEntity?,
     val sys: SysEntity,
     val timezone: Int,
     val visibility: Int,

@@ -2,6 +2,7 @@ package com.example.cozyweatherapp.features.home.data.repository
 
 import android.util.Log
 import com.example.cozyweatherapp.features.home.data.datasource.remote.WeatherApi
+import com.example.cozyweatherapp.features.home.data.entity.toModel
 import com.example.cozyweatherapp.features.home.domain.models.TodayWeatherModel
 import com.example.cozyweatherapp.features.home.domain.repository.IWeatherRepository
 
@@ -17,14 +18,13 @@ class WeatherRepositoryImpl(private val weatherAPI: WeatherApi) : IWeatherReposi
                 apiKey = apiKey,
                 lat = lat,
                 lon = lon,
-            );
+            )
 
-            result
+            result.toModel()
         } catch (e: Throwable) {
             Log.d("tag", "Error: $e")
 
             null
         }
-
     }
 }

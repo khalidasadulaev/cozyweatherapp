@@ -9,7 +9,7 @@ data class TodayWeatherModel(
     val id: Int,
     val main: MainModel,
     val name: String,
-    val rain: RainModel,
+    val rain: RainModel?,
     val sys: SysModel,
     val timezone: Int,
     val visibility: Int,

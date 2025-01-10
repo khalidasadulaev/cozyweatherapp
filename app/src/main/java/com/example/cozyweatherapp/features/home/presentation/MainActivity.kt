@@ -1,12 +1,13 @@
 package com.example.cozyweatherapp.features.home.presentation
 
-import android.annotation.SuppressLint
+import android.Manifest
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -25,27 +26,48 @@ class MainActivity : AppCompatActivity() {
                 return MainPageViewModel(WeatherRepositoryImpl(RetrofitInstance.api)) as T
             }
         }
-    });
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+            ),
+            0
+        )
         setContentView(R.layout.activity_main)
 
         val mainTemperature: TextView = findViewById(R.id.textView2)
         val mainWeather: TextView = findViewById(R.id.textView3)
         val city: TextView = findViewById(R.id.textView4)
+        val feelsLike: TextView = findViewById(R.id.textView6)
+        val sunSet: TextView = findViewById(R.id.textView7)
 
         lifecycleScope.launch {
 
             repeatOnLifecycle(Lifecycle.State.CREATED) {
 
                 viewModel.weather.collectLatest { uiState ->
-                    Log.d("tag", "Initialized result : $uiState")
+                    Log.d("tag", "viewModel.weather.collectLatest : $uiState")
 
                     mainTemperature.text = "${uiState?.main?.temp.toString()}°"
                     mainWeather.text = uiState?.weather?.first()?.description
                     city.text = uiState?.name
+                    feelsLike.text = uiState?.main?.feelsLike.toString()
+
+                    if (uiState?.sys?.sunset != null) {
+                        val sdf = java.text.SimpleDateFormat.getTimeInstance()
+                        val time = uiState.sys.sunset.toLong()
+                        val date = java.util.Date(time * 1000)
+
+                        sunSet.text = sdf.format(date)
+                    }
+
+
                 }
             }
         }
