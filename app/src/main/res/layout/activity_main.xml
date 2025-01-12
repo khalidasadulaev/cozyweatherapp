@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/cloudy_kitty_background"
+    android:background="@drawable/cloudy_kitty_blue_background"
     android:orientation="vertical"
     android:padding="26dp"
     tools:context=".features.home.presentation.MainActivity">
@@ -148,16 +148,30 @@
     </LinearLayout>
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/shape_card_component"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
     <TextView
         android:id="@+id/textView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Random Text"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <TextView
         android:id="@+id/textView9"
@@ -169,10 +183,9 @@
     speedily by recurred. Son interest wandered
     sir addition end say. Manners beloved affixed
     picture men ask."
-
         app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

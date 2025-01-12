@@ -2,6 +2,8 @@ package com.example.cozyweatherapp.features.home.data.entity
 
 import com.example.cozyweatherapp.features.home.domain.models.CloudsModel
 import com.example.cozyweatherapp.features.home.domain.models.CoordModel
+import com.example.cozyweatherapp.features.home.domain.models.HourlyWeatherModel
+import com.example.cozyweatherapp.features.home.domain.models.HourlyWeatherResponseModel
 import com.example.cozyweatherapp.features.home.domain.models.MainModel
 import com.example.cozyweatherapp.features.home.domain.models.RainModel
 import com.example.cozyweatherapp.features.home.domain.models.SysModel
@@ -17,6 +19,20 @@ fun CoordEntity.toModel() = CoordModel(
     lat = lat,
     lon = lon
 )
+
+fun HourlyWeatherEntity.toModel() = HourlyWeatherModel(
+    date = dt,
+    main = main.toModel(),
+    weather = weather.map { it.toModel() }
+)
+
+fun HourlyWeatherResponseEntity.toModel() = HourlyWeatherResponseModel(
+    cod = cod,
+    message = message,
+    count = cnt,
+    list = list.map { it.toModel() }
+)
+
 
 fun MainEnity.toModel() = MainModel(
     feelsLike = feelsLike,

@@ -1,4 +1,4 @@
-package com.example.cozyweatherapp.base
+package com.example.cozyweatherapp.base.extensions
 
 import android.Manifest
 import android.content.Context

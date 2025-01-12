@@ -1,0 +1,51 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+            <!--        NOW COLUMN-->
+<!--            ASKMENTOR: Правильно ли создал файл xml для визуального компонента?-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/hourlyWeatherHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Now" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical">
+
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/clouds_icon" />
+
+                        <TextView
+                            android:id="@+id/hourlyWeatherTemp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="22" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+</FrameLayout>

@@ -1,8 +1,6 @@
 package com.example.cozyweatherapp.features.home.presentation
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -12,7 +10,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cozyweatherapp.R
+import com.example.cozyweatherapp.base.MyViewHolder
 import com.example.cozyweatherapp.base.RetrofitInstance
 import com.example.cozyweatherapp.features.home.data.repository.WeatherRepositoryImpl
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -44,18 +45,32 @@ class MainActivity : AppCompatActivity() {
         val city: TextView = findViewById(R.id.textView4)
         val feelsLike: TextView = findViewById(R.id.textView6)
         val sunSet: TextView = findViewById(R.id.textView7)
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.setLayoutManager(
+            LinearLayoutManager(
+                this,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        )
+
+//        ASKMENTOR: Не смог запустить два метода в одном launch. Как я оставил это ок?
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.hourlyWeatherData.collectLatest { uiState ->
+                    recyclerView.adapter = uiState?.list?.let { MyViewHolder(it) }
+                }
+            }
+        }
 
         lifecycleScope.launch {
-
             repeatOnLifecycle(Lifecycle.State.CREATED) {
-
                 viewModel.weather.collectLatest { uiState ->
-                    Log.d("tag", "viewModel.weather.collectLatest : $uiState")
-
                     mainTemperature.text = "${uiState?.main?.temp.toString()}°"
                     mainWeather.text = uiState?.weather?.first()?.description
                     city.text = uiState?.name
                     feelsLike.text = uiState?.main?.feelsLike.toString()
+
 
                     if (uiState?.sys?.sunset != null) {
                         val sdf = java.text.SimpleDateFormat.getTimeInstance()
@@ -64,8 +79,6 @@ class MainActivity : AppCompatActivity() {
 
                         sunSet.text = sdf.format(date)
                     }
-
-
                 }
             }
         }
